@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F.K VENTURES</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-900">F.K DEALSGH VENTURES</h1>
+      
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex space-x-6 font-medium">
+        <a href="#" class="hover:text-gray-600">Home</a>
+        <a href="#products" class="hover:text-gray-600">Products</a>
+        <a href="cart.html" class="hover:text-gray-600">Cart</a>
+        <a href="#contact" class="hover:text-gray-600">Contact</a>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden text-gray-800" id="menu-btn">
+        ☰
+      </button>
+    </div>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="hidden md:hidden bg-gray-100 px-6 py-4 space-y-2">
+      <a href="#" class="block hover:text-gray-600">Home</a>
+      <a href="#products" class="block hover:text-gray-600">Products</a>
+      <a href="cart.html" class="block hover:text-gray-600">Cart</a>
+      <a href="#contact" class="block hover:text-gray-600">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative bg-cover bg-center h-[400px]" style="background-image: url('images/warehouse.jpg');">
+    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+      <div class="text-center text-white px-6">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4">Your Wholesale Partner</h2>
+        <p class="text-lg md:text-xl mb-6">Wholesale and Retail of bottle drinks and minerals.</p>
+        <a href="#products" class="bg-blue-500 text-gray-900 px-6 py-3 rounded-lg font-semibold shadow hover:bg-blue-400">
+          Shop Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section id="products" class="py-16 container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Featured Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+      
+      <!-- Product Card -->
+      <div class="bg-white p-5 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+        <img src="images/belaqua.jpg" alt="Bel Aqua" class="w-full h-48 object-cover rounded-lg">
+        <h3 class="text-xl font-semibold mt-4">Bel Aqua 750ml</h3>
+        <p class="text-gray-600 mt-2">Wholesale Price: ₵35</p>
+        <button class="mt-4 w-full bg-blue-500 text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-blue-400">Add to Cart</button>
+      </div>
+
+
+      <!-- Product Card -->
+      <div class="bg-white p-5 rounded-xl shadow-lg hover:shadow-2xl transition duration-300">
+        <img src="images/Bel-Cola.jpg" alt="Bel-Cola" class="w-full h-48 object-cover rounded-lg">
+        <h3 class="text-xl font-semibold mt-4">Bel-Cola</h3>
+        <p class="text-gray-600 mt-2">Wholesale Price: ₵20</p>
+        <button class="mt-4 w-full bg-blue-500 text-gray-900 px-4 py-2 rounded-lg font-medium hover:bg-blue-400">Add to Cart</button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gray-100 py-16 px-6">
+    <div class="container mx-auto max-w-lg">
+      <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
+      <form class="bg-white shadow-lg rounded-xl p-6 space-y-4">
+        <input type="text" placeholder="Your Name" class="w-full border rounded-lg p-3">
+        <input type="email" placeholder="Your Email" class="w-full border rounded-lg p-3">
+        <textarea rows="4" placeholder="Your Message" class="w-full border rounded-lg p-3"></textarea>
+        <button class="w-full bg-gray-900 text-white px-4 py-2 rounded-lg font-medium hover:bg-gray-700">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 Wholesale Shop. All rights reserved.</p>
+  </footer>
+
+  <!-- JS for Mobile Menu -->
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+
+</body>
+</html>

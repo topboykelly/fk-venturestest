@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Wholesale Shop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 font-sans min-h-screen flex flex-col">
+
+  <main class="flex-grow">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-gray-800">F.K. DEALSGH VENTURES</h1>
+      <div class="space-x-6 font-medium">
+        <a href="index.html" class="hover:text-indigo-600">Home</a>
+        <a href="index.html#products" class="hover:text-indigo-600">Products</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Cart Section -->
+  <section class="max-w-6xl mx-auto px-6 py-12">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Your Cart</h2>
+
+    <!-- Cart Table -->
+    <div class="overflow-x-auto bg-white shadow rounded-lg">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-100 text-gray-600">
+            <th class="py-3 px-4">Product</th>
+            <th class="py-3 px-4">Quantity</th>
+            <th class="py-3 px-4">Price</th>
+            <th class="py-3 px-4">Total</th>
+            <th class="py-3 px-4"></th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Example item -->
+          <tr class="border-t">
+            <td class="py-3 px-4">Bel Aqua 750ml</td>
+            <td class="py-3 px-4">
+              <input type="number" value="2" min="1" class="w-16 border rounded p-1 text-center">
+            </td>
+            <td class="py-3 px-4">₵35</td>
+            <td class="py-3 px-4">₵70</td>
+            <td class="py-3 px-4 text-red-500 cursor-pointer">Remove</td>
+          </tr>
+          <tr class="border-t">
+            <td class="py-3 px-4">Bel-Cola</td>
+            <td class="py-3 px-4">
+              <input type="number" value="1" min="1" class="w-16 border rounded p-1 text-center">
+            </td>
+            <td class="py-3 px-4">₵20</td>
+            <td class="py-3 px-4">₵20</td>
+            <td class="py-3 px-4 text-red-500 cursor-pointer">Remove</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="mt-8 flex justify-end">
+      <div class="bg-white shadow-lg rounded-lg p-6 w-80">
+        <h3 class="text-xl font-semibold mb-4">Summary</h3>
+        <div class="flex justify-between text-gray-700 mb-2">
+          <span>Subtotal:</span>
+          <span>₵90</span>
+        </div>
+        <div class="flex justify-between text-gray-700 mb-2">
+          <span>Tax (5%):</span>
+          <span>₵4.50</span>
+        </div>
+        <div class="flex justify-between font-bold text-gray-900 text-lg mt-2 border-t pt-2">
+          <span>Total:</span>
+          <span>₵94.50</span>
+        </div>
+        <button class="mt-6 w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg font-semibold">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-6 mt-12">
+    <p>&copy; 2025 Wholesale Shop. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
