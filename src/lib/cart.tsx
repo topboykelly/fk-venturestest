@@ -4,10 +4,10 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useRef,
   useState,
-  useSyncExternalStore,
 } from "react";
 import type { Product } from "@/data/catalog";
 
@@ -27,6 +27,7 @@ type CartContextValue = {
   lines: CartLine[];
   count: number;
   subtotal: number;
+  ready: boolean;
   isOpen: boolean;
   toast: Toast | null;
   openCart: () => void;
@@ -41,11 +42,6 @@ type CartContextValue = {
 
 const CartContext = createContext<CartContextValue | null>(null);
 
-const EMPTY: StoredLine[] = [];
-let lines: StoredLine[] = EMPTY;
-let loaded = false;
-const listeners = new Set<() => void>();
-
 function isStoredLine(value: unknown): value is StoredLine {
   if (!value || typeof value !== "object") return false;
   const line = value as Record<string, unknown>;
@@ -57,45 +53,19 @@ function isStoredLine(value: unknown): value is StoredLine {
   );
 }
 
-function load() {
-  loaded = true;
+function readStorage(): StoredLine[] {
   try {
     const parsed: unknown = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? "[]");
-    lines = Array.isArray(parsed) ? parsed.filter(isStoredLine) : EMPTY;
+    return Array.isArray(parsed) ? parsed.filter(isStoredLine) : [];
   } catch {
-    lines = EMPTY;
+    return [];
   }
 }
 
-function getSnapshot() {
-  if (!loaded) load();
-  return lines;
-}
-
-const getServerSnapshot = () => EMPTY;
-
-function subscribe(listener: () => void) {
-  listeners.add(listener);
-  const onStorage = (e: StorageEvent) => {
-    if (e.key === STORAGE_KEY) {
-      loaded = false;
-      load();
-      listeners.forEach((l) => l());
-    }
-  };
-  window.addEventListener("storage", onStorage);
-  return () => {
-    listeners.delete(listener);
-    window.removeEventListener("storage", onStorage);
-  };
-}
-
-function commit(next: StoredLine[]) {
-  lines = next.length ? next : EMPTY;
+function writeStorage(next: StoredLine[]) {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(lines));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
   } catch {}
-  listeners.forEach((l) => l());
 }
 
 export function CartProvider({
@@ -105,12 +75,29 @@ export function CartProvider({
   products: Product[];
   children: React.ReactNode;
 }) {
-  const stored = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const [stored, setStored] = useState<StoredLine[]>([]);
+  const [ready, setReady] = useState(false);
   const [isOpen, setOpen] = useState(false);
   const [toast, setToast] = useState<Toast | null>(null);
   const toastId = useRef(0);
 
+  useEffect(() => {
+    setStored(readStorage());
+    setReady(true);
+
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === STORAGE_KEY) setStored(readStorage());
+    };
+    window.addEventListener("storage", onStorage);
+    return () => window.removeEventListener("storage", onStorage);
+  }, []);
+
   const byId = useMemo(() => new Map(products.map((p) => [p.id, p])), [products]);
+
+  const commit = useCallback((next: StoredLine[]) => {
+    setStored(next);
+    writeStorage(next);
+  }, []);
 
   const cartLines: CartLine[] = useMemo(
     () =>
@@ -140,37 +127,46 @@ export function CartProvider({
   const addItem = useCallback(
     (productId: string, qty = 1) => {
       if (!byId.has(productId) || qty < 1) return false;
-      const existing = lines.find((l) => l.productId === productId);
-      if (existing) {
-        commit(
-          lines.map((l) => (l.productId === productId ? { ...l, qty: l.qty + qty } : l)),
-        );
-      } else {
-        commit([...lines, { productId, qty }]);
-      }
+      setStored((prev) => {
+        const existing = prev.find((l) => l.productId === productId);
+        const next = existing
+          ? prev.map((l) => (l.productId === productId ? { ...l, qty: l.qty + qty } : l))
+          : [...prev, { productId, qty }];
+        writeStorage(next);
+        return next;
+      });
       return true;
     },
     [byId],
   );
 
   const updateQty = useCallback((productId: string, qty: number) => {
-    if (qty <= 0) {
-      commit(lines.filter((l) => l.productId !== productId));
-      return;
-    }
-    commit(lines.map((l) => (l.productId === productId ? { ...l, qty } : l)));
+    setStored((prev) => {
+      const next =
+        qty <= 0 ? prev.filter((l) => l.productId !== productId) : prev.map((l) => (l.productId === productId ? { ...l, qty } : l));
+      writeStorage(next);
+      return next;
+    });
   }, []);
 
   const removeItem = useCallback((productId: string) => {
-    commit(lines.filter((l) => l.productId !== productId));
+    setStored((prev) => {
+      const next = prev.filter((l) => l.productId !== productId);
+      writeStorage(next);
+      return next;
+    });
   }, []);
 
-  const clear = useCallback(() => commit([]), []);
+  const clear = useCallback(() => {
+    setStored([]);
+    writeStorage([]);
+  }, []);
 
   const value: CartContextValue = {
     lines: cartLines,
     count,
     subtotal,
+    ready,
     isOpen,
     toast,
     openCart: () => setOpen(true),

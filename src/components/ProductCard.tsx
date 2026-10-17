@@ -19,7 +19,9 @@ export function ProductCard({ product }: { product: Product }) {
   const { addItem, notify } = useCart();
   const href = `/product/${product.slug}`;
 
-  const quickAdd = () => {
+  const quickAdd = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
     const added = addItem(product.id);
     notify(added ? "Added to cart" : "Could not add item", added);
   };
@@ -27,15 +29,17 @@ export function ProductCard({ product }: { product: Product }) {
   return (
     <article className="group relative flex h-full flex-col rounded-3xl bg-surface p-2.5 transition-shadow duration-300 hover:shadow-xl hover:shadow-accent/10 has-[a:focus-visible]:ring-2 has-[a:focus-visible]:ring-accent dark:ring-1 dark:ring-white/5">
       <div className="relative">
-        <ProductImage
-          src={product.image}
-          alt={product.name}
-          sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
-          className="aspect-square rounded-2xl"
-          imageClassName="transition-transform duration-700 group-hover:scale-105"
-        />
+        <Link href={href} className="block focus-visible:outline-none" tabIndex={-1}>
+          <ProductImage
+            src={product.image}
+            alt={product.name}
+            sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
+            className="aspect-square rounded-2xl"
+            imageClassName="transition-transform duration-700 group-hover:scale-105"
+          />
+        </Link>
         {product.badge && (
-          <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
+          <div className="pointer-events-none absolute top-3 left-3 z-10 flex flex-wrap gap-1.5">
             <span
               className={cn(
                 "rounded-full px-3 py-1 text-xs font-medium capitalize shadow-sm",
@@ -51,7 +55,7 @@ export function ProductCard({ product }: { product: Product }) {
           onClick={quickAdd}
           aria-label={`Add ${product.name} to cart`}
           title="Quick add"
-          className="absolute right-3 bottom-3 z-10 grid size-11 place-items-center rounded-full bg-surface text-ink shadow-md transition-all duration-300 group-hover:rotate-90 group-hover:bg-night group-hover:text-white hover:bg-accent!"
+          className="absolute right-3 bottom-3 z-20 grid size-11 place-items-center rounded-full bg-surface text-ink shadow-md transition-all duration-300 group-hover:rotate-90 group-hover:bg-night group-hover:text-white hover:bg-accent!"
         >
           <Plus className="size-5" aria-hidden="true" />
         </button>
@@ -62,7 +66,7 @@ export function ProductCard({ product }: { product: Product }) {
           {categoryLabel(product.category)}
         </p>
         <h3 className="mt-1 font-semibold sm:text-lg">
-          <Link href={href} className="after:absolute after:inset-0 after:rounded-3xl focus-visible:outline-none">
+          <Link href={href} className="hover:text-accent focus-visible:outline-none">
             {product.name}
           </Link>
         </h3>

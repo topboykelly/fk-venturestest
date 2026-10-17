@@ -4,7 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, MessageCircle, ShoppingBag, Trash2 } from "lucide-react";
 import { brand } from "@/data/store";
-import { useHydrated } from "@/hooks/useHydrated";
 import { useCart } from "@/lib/cart";
 import { whatsappUrl } from "@/lib/contact";
 import { formatCedi } from "@/lib/format";
@@ -25,10 +24,9 @@ function orderMessage(
 }
 
 export function CartPage() {
-  const hydrated = useHydrated();
-  const { lines, count, subtotal, updateQty, removeItem, clear } = useCart();
+  const { lines, count, subtotal, updateQty, removeItem, clear, ready } = useCart();
 
-  if (!hydrated) {
+  if (!ready) {
     return (
       <section className="relative bg-grid pt-32 pb-20 md:pt-36 md:pb-28">
         <div className="container-page">
