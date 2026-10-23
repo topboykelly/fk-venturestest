@@ -4,6 +4,7 @@ import { useState } from "react";
 import { brand } from "@/data/store";
 import { mailtoUrl, whatsappUrl } from "@/lib/contact";
 import { PillButton, PillLink } from "../ui/Button";
+import { Field, TextArea, TextInput } from "../ui/fields";
 
 export function ContactForm() {
   const [name, setName] = useState("");
@@ -21,47 +22,37 @@ export function ContactForm() {
         window.location.href = mailtoUrl(subject, body);
       }}
     >
-      <div>
-        <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
-          Name
-        </label>
-        <input
+      <Field id="name" label="Name">
+        <TextInput
           id="name"
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full rounded-2xl border border-ink/10 bg-paper px-4 py-3 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
           placeholder="Your name"
+          autoComplete="name"
         />
-      </div>
-      <div>
-        <label htmlFor="email" className="mb-1.5 block text-sm font-medium">
-          Email
-        </label>
-        <input
+      </Field>
+      <Field id="email" label="Email">
+        <TextInput
           id="email"
           type="email"
           required
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full rounded-2xl border border-ink/10 bg-paper px-4 py-3 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
           placeholder="you@example.com"
+          autoComplete="email"
         />
-      </div>
-      <div>
-        <label htmlFor="message" className="mb-1.5 block text-sm font-medium">
-          Message
-        </label>
-        <textarea
+      </Field>
+      <Field id="message" label="Message">
+        <TextArea
           id="message"
           required
           rows={5}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="w-full resize-y rounded-2xl border border-ink/10 bg-paper px-4 py-3 outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
           placeholder="Tell us about your wholesale needs…"
         />
-      </div>
+      </Field>
       <div className="flex flex-wrap gap-3 pt-2">
         <PillButton type="submit" variant="dark" arrow>
           Send email
