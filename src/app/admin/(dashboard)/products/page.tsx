@@ -12,6 +12,7 @@ import { formatCedi } from "@/lib/format";
 import { coverPhoto, productFromRow, type Product, type ProductRow } from "@/lib/product";
 
 export const metadata: Metadata = { title: "Products" };
+export const instant = false;
 
 export default function ProductsPage() {
   return (

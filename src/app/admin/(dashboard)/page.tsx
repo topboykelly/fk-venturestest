@@ -11,6 +11,7 @@ import { itemCount, type OrderRow } from "@/lib/orders";
 import { productFromRow, type Product, type ProductRow } from "@/lib/product";
 
 export const metadata: Metadata = { title: "Dashboard" };
+export const instant = false;
 
 function daysAgo(days: number) {
   return new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();

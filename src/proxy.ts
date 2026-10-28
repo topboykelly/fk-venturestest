@@ -26,14 +26,18 @@ export async function proxy(request: NextRequest) {
 
   const { data } = await supabase.auth.getClaims();
 
-  const isLogin = request.nextUrl.pathname === "/admin/login";
+  const pathname = request.nextUrl.pathname;
+  const isLogin = pathname === "/admin/login";
   if (!data?.claims && !isLogin) {
-    return NextResponse.redirect(new URL("/admin/login", request.url));
+    const login = request.nextUrl.clone();
+    login.pathname = "/admin/login";
+    login.search = "";
+    return NextResponse.redirect(login);
   }
 
   return response;
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin", "/admin/:path*"],
 };

@@ -9,6 +9,7 @@ import { formatCedi } from "@/lib/format";
 import { itemCount, type OrderRow } from "@/lib/orders";
 
 export const metadata: Metadata = { title: "Orders" };
+export const instant = false;
 
 export default function OrdersPage({ searchParams }: { searchParams: Promise<{ status?: string }> }) {
   return (
