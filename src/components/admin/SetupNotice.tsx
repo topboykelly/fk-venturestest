@@ -5,7 +5,7 @@ const steps = [
   "Paste and run supabase/schema.sql from this repo.",
   "Authentication → Users: add your admin email/password, then disable public sign-ups.",
   "Run: insert into public.admins (user_id) select id from auth.users where email = 'you@example.com';",
-  "Copy .env.example to .env.local and fill NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, and SUPABASE_SERVICE_ROLE_KEY.",
+  "Copy .env.example to .env.local and fill NEXT_PUBLIC_SUPABASE_URL, the publishable (or anon) key, and SUPABASE_SERVICE_ROLE_KEY (secret).",
   "Restart npm run dev, sign in here, then import starter products.",
 ];
 
