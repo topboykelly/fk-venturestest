@@ -7,7 +7,7 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
-  allowedDevOrigins: ["127.0.0.1", "localhost", "*.cursor.app", "*.cursor.so", "*.ngrok-free.app"],
+  allowedDevOrigins: ["127.0.0.1", "localhost", "*.cursor.app", "*.cursor.so", "*.ngrok-free.app", "*.loca.lt", "*.trycloudflare.com"],
   images: {
     remotePatterns: [
       {
