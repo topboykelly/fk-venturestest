@@ -66,6 +66,7 @@ export const footerColumns = [
       { label: "Our Story", href: "/#story" },
       { label: "WhatsApp", href: `https://wa.me/${contact.whatsapp}` },
       { label: "Email", href: `mailto:${contact.email}` },
+      { label: "Admin", href: "/admin/login" },
     ],
   },
 ] as const;
