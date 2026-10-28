@@ -5,6 +5,7 @@ import { ProductView } from "@/components/product/ProductView";
 import { Reveal } from "@/components/ui/Section";
 import { Accent, SectionHeading } from "@/components/ui/SectionHeading";
 import { getProductBySlug, getProducts } from "@/lib/catalog";
+import { coverPhoto } from "@/lib/product";
 
 const PLACEHOLDER_SLUG = "__none__";
 
@@ -23,7 +24,7 @@ export async function generateMetadata({
   return {
     title: product.name,
     description: product.description || `${product.name} — wholesale from F.K. Ventures.`,
-    openGraph: product.image ? { images: [product.image] } : undefined,
+    openGraph: coverPhoto(product) ? { images: [coverPhoto(product)] } : undefined,
   };
 }
 

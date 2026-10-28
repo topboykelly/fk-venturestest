@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import heroPhoto from "@/assets/hero.jpg";
 import { brand } from "@/data/store";
 import { formatCedi } from "@/lib/format";
-import { heroProductFrom, type Product } from "@/lib/catalog";
+import { heroProductFrom, type Product } from "@/lib/product";
 import { PillLink } from "./ui/Button";
 import { easeOut } from "./ui/Section";
 

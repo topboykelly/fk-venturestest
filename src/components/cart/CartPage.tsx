@@ -7,6 +7,7 @@ import { brand } from "@/data/store";
 import { useCart } from "@/lib/cart";
 import { whatsappUrl } from "@/lib/contact";
 import { formatCedi } from "@/lib/format";
+import { coverPhoto } from "@/lib/product";
 import { PillLink } from "../ui/Button";
 import { ProductImage } from "../ui/ProductImage";
 import { QtyStepper } from "../ui/QtyStepper";
@@ -83,7 +84,7 @@ export function CartPage() {
                 >
                   <Link href={`/product/${line.product.slug}`} className="relative size-24 shrink-0 overflow-hidden rounded-2xl">
                     <ProductImage
-                      src={line.product.image}
+                      src={coverPhoto(line.product)}
                       alt={line.product.name}
                       sizes="96px"
                       className="size-full rounded-2xl"

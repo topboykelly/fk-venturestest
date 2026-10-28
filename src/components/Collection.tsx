@@ -4,7 +4,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { categories, type Category } from "@/data/store";
 import { cn } from "@/lib/cn";
-import type { Product } from "@/lib/catalog";
+import type { Product } from "@/lib/product";
 import { ProductCard } from "./ProductCard";
 import { Reveal, Section, easeOut } from "./ui/Section";
 import { Accent, SectionHeading } from "./ui/SectionHeading";

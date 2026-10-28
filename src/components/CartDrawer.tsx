@@ -7,6 +7,7 @@ import { ShoppingBag, Trash2, X } from "lucide-react";
 import { categoryLabel } from "@/data/store";
 import { useCart } from "@/lib/cart";
 import { formatCedi } from "@/lib/format";
+import { coverPhoto } from "@/lib/product";
 import { PillLink } from "./ui/Button";
 import { ProductImage } from "./ui/ProductImage";
 import { QtyStepper } from "./ui/QtyStepper";
@@ -87,7 +88,7 @@ export function CartDrawer() {
                         className="relative size-20 shrink-0 overflow-hidden rounded-2xl"
                       >
                         <ProductImage
-                          src={line.product.image}
+                          src={coverPhoto(line.product)}
                           alt={line.product.name}
                           sizes="80px"
                           className="size-full rounded-2xl"

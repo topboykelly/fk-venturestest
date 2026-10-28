@@ -9,7 +9,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Product } from "@/data/catalog";
+import type { Product } from "@/lib/product";
 
 const STORAGE_KEY = "fk_cart";
 

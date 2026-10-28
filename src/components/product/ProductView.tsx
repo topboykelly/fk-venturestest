@@ -6,7 +6,7 @@ import { categoryLabel } from "@/data/store";
 import { useCart } from "@/lib/cart";
 import { whatsappUrl } from "@/lib/contact";
 import { formatCedi } from "@/lib/format";
-import type { Product } from "@/lib/catalog";
+import { coverPhoto, type Product } from "@/lib/product";
 import { PillButton, PillLink } from "../ui/Button";
 import { ProductImage } from "../ui/ProductImage";
 import { QtyStepper } from "../ui/QtyStepper";
@@ -31,7 +31,7 @@ export function ProductView({ product }: { product: Product }) {
         className="relative overflow-hidden rounded-4xl bg-surface p-4 dark:ring-1 dark:ring-white/5"
       >
         <ProductImage
-          src={product.image}
+          src={coverPhoto(product)}
           alt={product.name}
           sizes="(min-width: 1024px) 40vw, 100vw"
           preload

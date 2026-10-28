@@ -6,7 +6,7 @@ import { categoryLabel } from "@/data/store";
 import { useCart } from "@/lib/cart";
 import { cn } from "@/lib/cn";
 import { formatCedi } from "@/lib/format";
-import type { Product } from "@/lib/catalog";
+import { coverPhoto, type Product } from "@/lib/product";
 import { ProductImage } from "./ui/ProductImage";
 
 export const badgeStyles: Record<NonNullable<Product["badge"]>, string> = {
@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: Product }) {
       <div className="relative">
         <Link href={href} className="block focus-visible:outline-none" tabIndex={-1}>
           <ProductImage
-            src={product.image}
+            src={coverPhoto(product)}
             alt={product.name}
             sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw"
             className="aspect-square rounded-2xl"

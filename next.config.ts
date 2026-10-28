@@ -8,8 +8,16 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   allowedDevOrigins: ["127.0.0.1"],
-  // Don't pipe every *.css file through Tailwind — that breaks next/font Google CSS modules
-  // (@vercel/turbopack-next/internal/font/...). Tailwind is handled via postcss.config.mjs.
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
+      },
+    ],
+  },
+  // Don't pipe every *.css file through Tailwind — that breaks next/font Google CSS modules.
   turbopack: {
     root,
   },

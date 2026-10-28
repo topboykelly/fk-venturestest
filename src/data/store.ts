@@ -69,3 +69,27 @@ export const footerColumns = [
     ],
   },
 ] as const;
+
+
+export const LOW_STOCK_THRESHOLD = 5;
+
+export const badges = ["new", "bestseller", "limited"] as const;
+export type Badge = (typeof badges)[number];
+
+export const orderStatuses = [
+  { id: "new", label: "New" },
+  { id: "confirmed", label: "Confirmed" },
+  { id: "dispatched", label: "Dispatched" },
+  { id: "delivered", label: "Delivered" },
+  { id: "cancelled", label: "Cancelled" },
+] as const;
+
+export type OrderStatus = (typeof orderStatuses)[number]["id"];
+
+export function isOrderStatus(value: string): value is OrderStatus {
+  return orderStatuses.some((s) => s.id === value);
+}
+
+export function isCategory(value: string): value is Category {
+  return categories.some((c) => c.id === value);
+}
